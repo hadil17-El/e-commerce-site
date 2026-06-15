@@ -1,3 +1,4 @@
+"use client"
 // app/shop/page.js
 import dynamic from "next/dynamic"
 
