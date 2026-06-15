@@ -1,0 +1,80 @@
+.success-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f7fb;
+    padding: 20px;
+}
+.success-card{
+    background:white;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08) ;
+    animation: fadeIn 0.4s ease-in-out;
+
+}
+.success-icon{
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: #e6fff0;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.success-title{
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #111;
+}
+.success-text{
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+.success-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+.btn-primary{
+    background: black;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+}
+.btn-secondary{
+    background: #f1f1f1;
+    color: black;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+}
+.btn-primary:hover {
+    opacity: 0.9;
+}
+.btn-secondary:hover{
+    background: #e5e5e5;
+}
+@keyframes fadeIn {
+    from{
+        transform: translateY(10px);
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

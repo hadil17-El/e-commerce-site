@@ -1,0 +1,53 @@
+.users-page {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.users-header h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+.users-header p {
+    color: #6b7280;
+}
+.users-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 20px;
+}
+.users-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-sizing: 0 5px 20px rgba(0,0,0,0.05);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.user-avatar{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+.role-badge {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.role-badge.admin{
+    background: #fee2e2;
+    color: #b91c1c;
+}
+.role-badge.customer{
+    background:#dbeafe;
+    color: #1d4ed8;
+}

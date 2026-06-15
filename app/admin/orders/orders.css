@@ -1,0 +1,53 @@
+.orders-page{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.orders-header h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+.orders-header p {
+    color: #6b7280;
+}
+.orders-table {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.orders-head,
+.orders-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    padding: 18px 20px;
+    align-items: center;
+}
+
+.orders-head {
+    background: #f3f4f6;
+    font-weight: 700;
+}
+
+.orders-row {
+    border-top: 1px solid #eee;
+}
+
+.status {
+    padding: 8px 12px;
+    border-radius: 999px;
+    width: fit-content;
+    font-size: 14px;
+}
+
+.status.pending {
+    background: #fef3c7;
+}
+
+.status.shipped {
+    background: #dbeafe;
+}
+
+.status.delivered {
+    background: #dcfce7;
+}

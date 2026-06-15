@@ -1,0 +1,53 @@
+.hero-slider {
+    border-radius: 24px;
+    max-width: 600px;
+    margin-top: 16px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto 146px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15)
+}
+
+.slide {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+.hero-image {
+  width: 100%;
+object-fit: cover;
+ 
+  
+}
+
+.hero-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    opacity: 0.5;
+    font-weight: bold;
+    z-index: 2;
+    font-size: 30px;
+}
+/*pagination(puntini) */
+.swiper-pagination-bullet {
+    background: white;
+    opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: black;
+}
+   
+
+@media (max-width:425px) {
+    .hero-slider{
+        max-width: 305px;
+    }
+    .hero-slider .swiper{
+    width: 19rem;
+}
+}

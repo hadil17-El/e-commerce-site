@@ -1,0 +1,27 @@
+.recommended-section {
+    padding: 20px;
+    margin-top: 40px;
+}
+.recommended-header {
+    margin-bottom: 20px;
+}
+.recommended-title{
+    font-size: 24px;
+    font-weight: 700;
+}
+.recommended-section .swiper {
+    padding-bottom: 10px;
+}
+.trend-card{
+    transition: transform 0.2s ease;
+}
+.trend-card:hover {
+    transform: translateY(-4px);
+}
+@media (max-width:425px){
+    .trend-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+}

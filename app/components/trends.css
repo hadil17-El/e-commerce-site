@@ -1,0 +1,173 @@
+/*
+.trends-section {
+    padding: 20px;
+}
+
+.trends-header {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.trends-container {
+    display: flex;
+    cursor: grab;
+    gap: 15px;
+    width: 100%;
+    padding: 10px 0;
+    animation: scroll 25s linear infinite;
+    scroll-snap-type: x mandatory;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.trends-container::-webkit-scrollbar{
+    display: none
+}
+.trends-container:hover{
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+.trends-container:active {
+    cursor: grabbing;
+}
+.trends-container::-webkit-scrollbar{
+    display: none;
+}
+.trends-container > * {
+    flex: 0 0 auto ;
+    scroll-snap-align: start;
+}*/
+.trends-section{
+    padding: 20px;
+    margin-bottom: 10rem;
+}
+.trends-header{
+    margin-bottom: 20px;
+}
+.trends-title{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* 🔥 bottone */
+.trend-btn{
+
+    margin-top:20px;
+
+    padding:12px 18px;
+
+    border:none;
+
+    background:black;
+
+    color:white;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+
+
+.trend-btn:hover{
+    background:#222;
+}
+.trend-card{
+    min-width: 180px;
+    flex: 0 0 auto;
+    border: 1px solid hsl(0, 0%, 87%);
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+
+    position: relative;
+    background: white;
+    scroll-snap-align: start;
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+.trend-card:hover {
+    transform: scale(1.05);
+}
+.trend-card-img-wrapper{
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    position:relative;
+    border-radius: 10px;
+}
+.trend-card-img-wrapper img {
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+.trend-name{
+    font-size: 14px;
+    margin-top: 8px;
+}
+.trend-price {
+    font-weight: bold;
+    margin-top: 5px;
+}
+.tend-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.trend-btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 8px ;
+    cursor: pointer;
+}
+.trend-btn:hover {
+    background: #333;
+}
+.quick-add{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: black;
+    color: white;
+    border: none;
+
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    opacity: 0;
+    transition: 0.3s;
+}
+.quick-add.added{
+    background:green;
+    transform:scale(1.05)
+}
+.trend-card:hover .quick-add{
+    opacity: 1;
+}
+.sale-badge{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:red;
+    color:white;
+    padding:5px 10px;
+    font-size:12px;
+    font-weight:bold;
+    border-radius:6px;
+    z-index:20
+}
