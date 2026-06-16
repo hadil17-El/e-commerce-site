@@ -16,67 +16,41 @@ export default function Login(){
     const [loading,setLoading]=useState(false)
     const router = useRouter()
     //Funzione per gestire il login dell'utente.
-    async function handleLogin(e){
-        //Preveniamo il comportamento di default del form.
-        /**Normalmente un form HTML:quando premi “submit”:ricarica la pagina
-Quindi senza questa riga succederebbe:
-👉 pagina refresh */
+  async function handleLogin(e){
     e.preventDefault()
-    //Iniziamo il processo di login, impostando lo stato di caricamento e resettando eventuali errori.
-    /**Qui dici:
 
-👉 “sta iniziando una richiesta al server”
-
-Serve per la UI, per esempio:
-
-disabilitare il bottone
-mostrare “Loading...”
-evitare doppi click
-
-Esempio:
-
-<button disabled={loading}>
-Se non lo fai, l’utente può cliccare 10 volte → 10 richieste al server. */
     setLoading(true)
-    /**Serve a pulire eventuali errori precedenti.
-
-Esempio problema reale:
-
-utente sbaglia password → appare errore
-corregge password
-rifà login
-
-Se NON fai:
-
-setError("")
-
-l’errore vecchio resta visibile anche se il nuovo login potrebbe funzionare. */
     setError("")
-    try{
-        const res=await fetch("https://e-commerce.ifree.page/login.php",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify(form)
+
+    try {
+        const formData = new FormData()
+        formData.append("email", form.email)
+        formData.append("password", form.password)
+
+        const res = await fetch("https://e-commerce.ifree.page/login.php", {
+            method: "POST",
+            body: formData
         })
+
         const data = await res.json()
+
         if(data.error){
             setError(data.error)
             return
         }
-        localStorage.setItem("token",data.token)
-        localStorage.setItem("user",JSON.stringify(data.user))
+
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("user", JSON.stringify(data.user))
 
         if(data.user.role === "admin"){
             router.push("/admin")
         } else {
             router.push("/")
         }
-    } finally{
+
+    } finally {
         setLoading(false)
     }
-        
 }
 return(
       <div className="auth-page">
