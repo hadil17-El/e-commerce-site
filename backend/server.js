@@ -52,6 +52,15 @@ app.get("/debug-env", (req, res) => {
     hostLength: process.env.DB_HOST ? process.env.DB_HOST.length : 0
   });
 });
+import dns from "dns";
 
+app.get("/debug-dns", (req, res) => {
+  dns.lookup(process.env.DB_HOST, (err, address) => {
+    if (err) {
+      return res.json({ error: err.message, code: err.code });
+    }
+    res.json({ address });
+  });
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
