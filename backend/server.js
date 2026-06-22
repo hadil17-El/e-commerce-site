@@ -43,6 +43,15 @@ app.use("/orders", ordersRoutes);
 app.use("/favorites", favoritesRoutes);
 app.use("/analytics", analyticsRoutes);
 app.use("/users", usersRoutes);
+app.get("/debug-env", (req, res) => {
+  res.json({
+    DB_HOST: process.env.DB_HOST,
+    DB_USER: process.env.DB_USER,
+    DB_NAME: process.env.DB_NAME,
+    DB_PORT: process.env.DB_PORT,
+    hostLength: process.env.DB_HOST ? process.env.DB_HOST.length : 0
+  });
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
