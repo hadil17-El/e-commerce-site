@@ -70,5 +70,25 @@ app.get("/debug-dns2", (req, res) => {
     res.json({ address });
   });
 });
+import net from "net";
+
+app.get("/debug-tcp", (req, res) => {
+  const socket = new net.Socket();
+  socket.setTimeout(5000);
+  
+  socket.connect(parseInt(process.env.DB_PORT), process.env.DB_HOST, () => {
+    res.json({ success: true });
+    socket.destroy();
+  });
+  
+  socket.on("error", (err) => {
+    res.json({ error: err.message, code: err.code });
+  });
+  
+  socket.on("timeout", () => {
+    res.json({ error: "timeout" });
+    socket.destroy();
+  });
+});
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
