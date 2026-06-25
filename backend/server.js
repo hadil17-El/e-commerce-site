@@ -6,7 +6,8 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://e-commerce-site-butb.vercel.app"
+  "https://e-commerce-site-butb.vercel.app",
+  "https://e-commerce-site-pi-orcin.vercel.app"
 ];
 
 app.use(cors({
