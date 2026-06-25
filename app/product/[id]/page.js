@@ -13,7 +13,7 @@ export default function ProductPage(){
         if(!id) return
         async function load(){
             const res = await fetch(
- `http://localhost/ecommerce/products.php?id=${id}`
+ `https://ecommerce-backend-uwgf.onrender.com/products?id=${id}`
             )
             const data = await res.json()
             setProduct(data)
