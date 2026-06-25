@@ -3,51 +3,62 @@ import db from "../db.js";
 import auth from "../middleware.js";
 
 const router = express.Router();
-
-router.post("/", auth, async (req, res) => {
-  const user_id = req.user.id;
-  const conn = await db.getConnection();
-
-  try {
-    await conn.beginTransaction();
-
-    const [cart] = await conn.query(
-      `SELECT c.*, p.price FROM cart c 
-       JOIN products p ON c.product_id = p.id 
-       WHERE c.user_id = ?`,
-      [user_id]
-    );
-
-    if (cart.length === 0) {
-      await conn.rollback();
-      return res.status(400).json({ error: "Cart Empty" });
-    }
-
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-    const [result] = await conn.query(
-      "INSERT INTO orders (user_id, total, status) VALUES (?, ?, 'pending')",
-      [user_id, total]
-    );
-    const order_id = result.insertId;
-
-    for (const item of cart) {
-      await conn.query(
-        "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)",
-        [order_id, item.product_id, item.quantity, item.price]
-      );
-    }
-
-    await conn.query("DELETE FROM cart WHERE user_id = ?", [user_id]);
-    await conn.commit();
-
-    res.json({ message: "Order created", order_id });
-  } catch (e) {
-    await conn.rollback();
-    res.status(500).json({ error: e.message });
-  } finally {
-    conn.release();
+//GET favorites
+router.get("/",auth,async(req,res)=>{
+  try{
+    const [favorites]=await db.query(
+      `SELECT p.*
+      FROM favorites f
+      JOIN products p ON p.id = f.product_id
+      WHERE f.user_id=?`,
+      [req.user.id]
+    )
+    res.json(favorites)
+  } catch(err) {
+    res.status(500).json({
+      error:err.message
+    })
   }
+})
+router.post("/", auth, async (req, res) => {
+  try{
+    const {product_id} = req.body
+    await db.query(
+      `
+      INSERT IGNORE INTO favorites
+      (user_id,product_id)
+      VALUES (?,?)
+      `,
+      [req.user.id,product_id]
+    )
+    res.json({
+      success:true
+    })
+  } catch (err){
+    res.status(500).json({
+      error:err.message
+    })
+  }
+ 
 });
+router.delete("/",auth,async (req,res)=>{
+  try{
+    const {product_id} = req.body
+    await db.query(
+      `
+      DELETR FROM favorites
+      WHERE user_id = ?
+      AND product_id =?`,
+      [req.user.id,product_id]
+    )
+    res.json({
+      success:true
+    })
+  } catch (err){
+    res.status(500).json({
+      error:err.message
+    })
+  }
+})
 
 export default router;
