@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/:id",auth,async (req,res)=> {
   const {id} = req.params
   const [order]=await db.query(
-    "SELECT * FROM orders WEHERE id=? AND user_id=?",
+    "SELECT * FROM orders WHERE id=? AND user_id=?",
     [id,req.user.id]
   )
   res.json(order)
