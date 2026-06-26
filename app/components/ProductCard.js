@@ -73,7 +73,7 @@ export default function ProductCard({product}){
             
         <div className="trend-card-img-wrapper">
             <HeartButton productId={product.id} isFavorite={isFav} onToggle={handleFav}/>
-                  {product.price < 40 && (
+                  {product.price <= 40 && (
                     <span className="sale-badge">SALE</span>
                   )}
                 <Image src={`/image/${product.image}`} width={300} height={300} alt={product.name} />
