@@ -114,7 +114,7 @@ return res.json()
 }
 export async function getRecommendedProducts(userId){
     const res = await fetch(
-        ` https://ecommerce-backend-uwgf.onrender.com/products?recommended=1&user_id=${userId}`
+        `https://ecommerce-backend-uwgf.onrender.com/products?recommended=1&user_id=${userId}`
 
     )
     if (!res.ok) return []
@@ -150,7 +150,7 @@ export async function getUsers() {
 
 export async function getAnalytics() {
     const res = await fetch(
-        " https://ecommerce-backend-uwgf.onrender.com/analytics",
+        "https://ecommerce-backend-uwgf.onrender.com/analytics",
         {
             headers:{
                 Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -235,32 +235,32 @@ export async function toggleFavorite(product_id){
 }
 export async function getProductsByGender(gender){
     const res = await fetch(
-        ` https://ecommerce-backend-uwgf.onrender.com/products?gender=${gender}`
+        `https://ecommerce-backend-uwgf.onrender.com/products?gender=${gender}`
     )
     return res.json()
 }
 export async function getProductsByCategory(category){
     const res = await fetch(
-        ` https://ecommerce-backend-uwgf.onrender.com/products?category=${category}`
+        `https://ecommerce-backend-uwgf.onrender.com/products?category=${category}`
     )
     return res.json()
 }
 export async function getSaleProducts(){
     const res = await fetch(
-        " https://ecommerce-backend-uwgf.onrender.com/products?sale=true"
+        "https://ecommerce-backend-uwgf.onrender.com/products?sale=true"
     )
     return res.json()
 }
 export async function searchProducts(query){
     const res = await fetch(
-        ` https://ecommerce-backend-uwgf.onrender.com/products?search=${query}`
+        `https://ecommerce-backend-uwgf.onrender.com/products?search=${query}`
     )
     const text =await res.text()
     if(!text) return []
     return JSON.parse(text)
 }
 export async function getOrders(){
-    const res =await fetch(" https://ecommerce-backend-uwgf.onrender.com/orders",{
+    const res =await fetch("https://ecommerce-backend-uwgf.onrender.com/orders",{
         headers:{
             Authorization:`Bearer ${localStorage.getItem("token")}`
         }
@@ -268,7 +268,7 @@ export async function getOrders(){
     return res.json()
 }
 export async function getOrderDetails(id){
-    const res = await fetch(` https://ecommerce-backend-uwgf.onrender.com/orders/${id}`,{
+    const res = await fetch(`https://ecommerce-backend-uwgf.onrender.com/orders/${id}`,{
         headers:{
         Authorization:`Bearer ${localStorage.getItem("token")}`
             }
