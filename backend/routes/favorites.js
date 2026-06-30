@@ -6,14 +6,14 @@ const router = express.Router();
 //GET favorites
 router.get("/",auth,async(req,res)=>{
   try{
-    const {favorites}=await db.query(
+    const { rows }=await db.query(
       `SELECT p.*
       FROM favorites f
       JOIN products p ON p.id = f.product_id
       WHERE f.user_id=$1`,
       [req.user.id]
     )
-    res.json(favorites)
+    res.json(rows)
   } catch(err) {
     res.status(500).json({
       error:err.message
