@@ -6,11 +6,11 @@ const router = express.Router();
 //GET favorites
 router.get("/",auth,async(req,res)=>{
   try{
-    const [favorites]=await db.query(
+    const {favorites}=await db.query(
       `SELECT p.*
       FROM favorites f
       JOIN products p ON p.id = f.product_id
-      WHERE f.user_id=?`,
+      WHERE f.user_id=$1`,
       [req.user.id]
     )
     res.json(favorites)
@@ -24,19 +24,19 @@ router.post("/", auth, async (req, res) => {
   try{
     const {product_id} = req.body
     const user_id = req.user.id
-    const [rows]=await db.query(
-      "SELECT * FROM favorites WHERE user_id=? AND product_id=?",
+    const {rows}=await db.query(
+      "SELECT * FROM favorites WHERE user_id=$1 AND product_id=$2",
       [user_id,product_id]
     )
     if(rows.length > 0) {
       await db.query(
-        "DELETE FROM favorites WHERE user_id=? AND product_id=?",
+        "DELETE FROM favorites WHERE user_id=$1 AND product_id=$2",
         [user_id,product_id]
       )
       return res.json({added:false})
     }
     await db.query(
-      "INSERT INTO favorites (user_id,product_id) VALUES (?,?)",
+      "INSERT INTO favorites (user_id,product_id) VALUES ($1,$2)",
       [user_id,product_id]
     )
     return res.json({added:true})
@@ -54,8 +54,8 @@ router.delete("/",auth,async (req,res)=>{
     await db.query(
       `
       DELETE FROM favorites
-      WHERE user_id = ?
-      AND product_id =?`,
+      WHERE user_id = $1
+      AND product_id =$2`,
       [req.user.id,product_id]
     )
     res.json({

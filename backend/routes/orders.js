@@ -8,20 +8,20 @@ router.get("/:id",auth,async (req,res)=> {
   try{
 
   const {id} = req.params
-  const [order]=await db.query(
-    "SELECT * FROM orders WHERE id=? AND user_id=?",
+  const {order}=await db.query(
+    "SELECT * FROM orders WHERE id=? AND user_id=$1",
     [id,req.user.id]
   )
   if(order.length === 0){
     return res.status(404).json({error:"Order not found"})
   }
-  const [items] = await db.query(
+  const {items} = await db.query(
      `
      SELECT oi.id,oi.quantity,oi.price,p.name,p.image
      FROM order_items oi
      JOIN products p ON
             p.id = oi.product_id
-            WHERE oi.order_id = ? 
+            WHERE oi.order_id = $1
      `,
      [id]
   )
@@ -37,8 +37,8 @@ router.get("/:id",auth,async (req,res)=> {
 })
 router.get("/",auth,async (req,res)=>{
   try{
-    const [orders]=await db.query(
-      "SELECT * FROM orders WHERE user_id =? ORDER BY id DESC",
+    const {orders}=await db.query(
+      "SELECT * FROM orders WHERE user_id =$1 ORDER BY id DESC",
       [req.user.id] 
     )
     res.json(orders)

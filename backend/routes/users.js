@@ -10,7 +10,7 @@ router.get("/", auth, async (req, res) => {
   }
 
   try {
-    const [rows] = await db.query("SELECT id, email, role FROM users");
+    const {rows} = await db.query("SELECT id, email, role FROM users");
     res.json(rows);
   } catch {
     res.status(500).json({ error: "Errore server" });

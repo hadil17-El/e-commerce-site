@@ -23,7 +23,11 @@ router.get("/", auth, async (req, res) => {
       "SELECT COUNT(*) as products FROM products"
     );
 
-    res.json({ revenue: revenue || 0, orders, users, products });
+    res.json({ 
+      revenue:Number(revenue) || 0,
+       orders:Number(orders),users:Number(users),
+        products:Number(products),
+       });
   } catch {
     res.status(500).json({ error: "Errore server" });
   }

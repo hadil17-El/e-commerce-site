@@ -14,7 +14,7 @@ router.post("/", auth, async (req, res) => {
     const [cart] = await conn.query(
       `SELECT c.*, p.price FROM cart c 
        JOIN products p ON c.product_id = p.id 
-       WHERE c.user_id = ?`,
+       WHERE c.user_id = $1`,
       [user_id]
     );
 
@@ -25,20 +25,20 @@ router.post("/", auth, async (req, res) => {
 
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    const [result] = await conn.query(
-      "INSERT INTO orders (user_id, total, status) VALUES (?, ?, 'pending')",
+    const {result} = await conn.query(
+      "INSERT INTO orders (user_id, total, status) VALUES ($1, $2, 'pending')",
       [user_id, total]
     );
-    const order_id = result.insertId;
+    const order_id = result.rows[0].insertId;
 
     for (const item of cart) {
       await conn.query(
-        "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)",
+        "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ($1, $2, $3, $4)",
         [order_id, item.product_id, item.quantity, item.price]
       );
     }
 
-    await conn.query("DELETE FROM cart WHERE user_id = ?", [user_id]);
+    await conn.query("DELETE FROM cart WHERE user_id = $1", [user_id]);
     await conn.commit();
 
     res.json({ message: "Order created", order_id });

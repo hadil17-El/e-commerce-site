@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    const [rows] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
+    const {rows} = await db.query("SELECT * FROM users WHERE email = $1", [email]);
     const user = rows[0];
 
     if (!user) {
